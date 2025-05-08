@@ -1,12 +1,12 @@
-// import 'package:ag/ag.dart';
 import 'package:ag/ag.dart';
 import 'package:auth/auth.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:contract/contract.dart';
 import 'package:di/di.dart';
 
 void injectorApp() {
   Dependencies().registerFactory(
-    () => Dio(BaseOptions(baseUrl: 'http://10.248.242.247:8720/ioc-service')),
+    () => Dio(BaseOptions(baseUrl: 'https://apis.congtrinhviettel.com.vn/ioc-mobile')),
   );
 
   Dependencies().registerLazySingleton<ApiGateway>(
@@ -30,4 +30,16 @@ void injectorApp() {
   );
 
   AuthDependency().init();
+  ContractDependency().init();
+  configLogin();
+}
+
+configLogin() {
+  Dependencies().getIt<AuthService>().setUrl(
+    {
+      "URL_LOGIN": "/service/login",
+      "URL_FORGET_PASSWORD": "/login/forgot-password",
+      "URL_REGISTER": "/register",
+    }
+  );
 }
