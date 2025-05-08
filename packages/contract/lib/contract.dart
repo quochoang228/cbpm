@@ -1,5 +1,41 @@
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+import 'package:ag/ag.dart';
+import 'package:cdn/cdn.dart';
+import 'package:contract/router/paths.dart';
+import 'package:contract/router/router_config.dart';
+import 'package:ds/ds.dart';
+import 'package:di/di.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'dart:convert';
+import 'package:logs/logs.dart';
+import 'package:persistent_storage/persistent_storage.dart';
+import 'package:router/router.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:utils/utils.dart';
+import 'package:auth/auth.dart';
+import 'package:intl/intl.dart';
+import 'dart:io';
+import 'package:cdn/gen/assets.gen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'entities/response/contract_electronic_dto.dart';
+import 'entities/response/file_contract_sign_dto.dart';
+
+///part --
+part 'page/contract_list_page.dart';
+part 'di/contract_di.dart';
+part 'data/repository/contract_repository.dart';
+part 'data/local/contract_storage.dart';
+part 'data/api/contract_api.dart';
+part 'services/contract_service.dart';
+part 'page/contract_detail_page.dart';
+part 'page/contact_history_page.dart';
+part 'widget/search_text_field_widget.dart';
+part 'provider/list_contract_provider.dart';
+part 'provider/detail_contract_provider.dart';
+part 'provider/contact_history_provider.dart';
