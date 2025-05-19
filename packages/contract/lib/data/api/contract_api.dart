@@ -7,6 +7,15 @@ abstract class IOCContractRequestApi {
   Future<Response> viewFileSignContract({
     required Map<String, dynamic> request,
   });
+  Future<Response> getLogsAction({
+    required Map<String, dynamic> request,
+  });
+  Future<Response> submitOtp({
+    required Map<String, dynamic> request,
+  });
+  Future<Response> createOtp({
+    required Map<String, dynamic> request,
+  });
 }
 
 class IOCContractRequestApiImpl implements IOCContractRequestApi {
@@ -32,6 +41,36 @@ class IOCContractRequestApiImpl implements IOCContractRequestApi {
   }) {
     return _apiGateway.post(
       '/common/viewFileSignContract',
+      data: request,
+    );
+  }
+
+  @override
+  Future<Response> getLogsAction({
+    required Map<String, dynamic> request,
+  }) {
+    return _apiGateway.post(
+      '/kpiLog/get-all-logs-action',
+      data: request,
+    );
+  }
+
+  @override
+  Future<Response> submitOtp({
+    required Map<String, dynamic> request,
+  }) {
+    return _apiGateway.post(
+      '/otp/submit',
+      data: request,
+    );
+  }
+
+  @override
+  Future<Response> createOtp({
+    required Map<String, dynamic> request,
+  }) {
+    return _apiGateway.post(
+      '/otp/create',
       data: request,
     );
   }

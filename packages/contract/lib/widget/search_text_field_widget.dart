@@ -65,7 +65,7 @@ class SearchTextFieldWidget extends HookConsumerWidget {
               : null,
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: CDNAssets.icons.personalcard.svg(),
+            child: CDNAssets.icons.search.svg(),
           ),
           hintText: hintText ?? 'Tìm kiếm',
           border: InputBorder.none,

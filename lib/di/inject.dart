@@ -6,7 +6,7 @@ import 'package:di/di.dart';
 
 void injectorApp() {
   Dependencies().registerFactory(
-    () => Dio(BaseOptions(baseUrl: 'https://apis.congtrinhviettel.com.vn/ioc-mobile')),
+    () => Dio(BaseOptions(baseUrl: 'https://apis.congtrinhviettel.com.vn/ioc-mobile/96')),
   );
 
   Dependencies().registerLazySingleton<ApiGateway>(
@@ -20,12 +20,6 @@ void injectorApp() {
       onTrack: (event, data) {
         print("📊 Tracking Event: $event - $data");
       },
-      // cacheDuration: null,
-      // refreshAccessToken: () async => '',
-      // maxRequests: null,
-      // rateLimitDuration: null,
-      // failureThreshold: null,
-      // circuitResetTimeout: null,
     ),
   );
 
