@@ -1,34 +1,35 @@
 part of '../../contract.dart';
 
-final contactHistoryProvider = StateNotifierProvider.autoDispose<ContactHistoryProvider, DataState<List<ContractElectronicDto>, ErrorResponse>>(
-      (ref) => ContactHistoryProvider(ref),
+final contactHistoryProvider = StateNotifierProvider.autoDispose<
+    ContactHistoryProvider, DataState<MobileCallLogsResponse, ErrorResponse>>(
+  (ref) => ContactHistoryProvider(ref),
 );
 
-class ContactHistoryProvider extends StateNotifier<DataState<List<ContractElectronicDto>, ErrorResponse>> {
-  ContactHistoryProvider(this.ref) : super(NotLoaded<List<ContractElectronicDto>>());
+class ContactHistoryProvider
+    extends StateNotifier<DataState<MobileCallLogsResponse, ErrorResponse>> {
+  ContactHistoryProvider(this.ref) : super(NotLoaded<MobileCallLogsResponse>());
 
   final Ref ref;
 
-  List<ContractElectronicDto> dataBackup = [];
+  MobileCallLogsResponse dataBackup = MobileCallLogsResponse();
 
-  Future<void> getListContract({String? keySearch}) async {
+  Future<void> getLogsAction({int? objectId, String? functionCode}) async {
     if (state.state == CurrentDataState.loading) return;
 
-    state = Loading<List<ContractElectronicDto>>();
+    state = Loading<MobileCallLogsResponse>();
     try {
-      final result = await Dependencies().getIt<IOCContactRepository>().getListContract(
+      final result =
+          await Dependencies().getIt<IOCContactRepository>().getLogsAction(
         request: {
-          'page': 1,
-          'pageSize': 10,
-          'keySearch': "",
-          // 'userNameAio' : Dependencies().getIt<AuthService>().user?.email,
+          'objectId': objectId,
+          'functionCode': functionCode,
         },
       );
       result.when(
         success: (data) {
-          if (data.data?.isNotEmpty ?? false) {
-            state = Fetched(data.data!);
-            dataBackup = data.data!;
+          if (data != null) {
+            state = Fetched(data);
+            dataBackup = data;
           } else {
             state = NoData();
           }
@@ -40,13 +41,4 @@ class ContactHistoryProvider extends StateNotifier<DataState<List<ContractElectr
       state = Failed(ErrorResponse(message: error.toString()));
     }
   }
-
-// void filter(WoStationStatusEnum woStationStatusEnum) {
-//   if (dataBackup.isEmpty) return;
-//   final filteredData = woStationStatusEnum == WoStationStatusEnum.all
-//       ? dataBackup
-//       : dataBackup.where((element) => element.status == woStationStatusEnum.status).toList();
-//
-//   state = filteredData.isEmpty ? NoData() : Fetched(filteredData);
-// }
 }

@@ -36,4 +36,64 @@ class DetailContractProvider extends StateNotifier<DataState<FileContractSignDto
     }
   }
 
+  Future<bool> rejectSignContact({
+    int? contractId,
+    String? description,
+    String? reject,
+  }) async {
+     bool res = false;
+    final request = ContractElectronicRequest(
+      contractId: contractId,
+      description: description,
+      type: '2',
+      rejectContent: reject,
+    );
+    try {
+      final result = await Dependencies().getIt<IOCContactRepository>().submitOtp(
+        request: request.toJson(),
+      );
+      result.when(
+        success: (data) {
+          if (data.result  ?? false) {
+            res = true;
+          } else {
+            res = false;
+          }
+        },
+      );
+    } catch (error) {
+      res = false;
+    }
+    return res;
+  }
+
+  Future<bool> createOtp({
+    int? contractId,
+    String? description,
+    String? content,
+  }) async {
+    bool res = false;
+    final request = ContractElectronicRequest(
+      contractId: contractId,
+      description: description,
+      content: content,
+    );
+    try {
+      final result = await Dependencies().getIt<IOCContactRepository>().createOtp(
+        request: request.toJson(),
+      );
+      result.when(
+        success: (data) {
+          if (data.otpId  != null) {
+            res = true;
+          } else {
+            res = false;
+          }
+        },
+      );
+    } catch (error) {
+      res = false;
+    }
+    return res;
+  }
 }

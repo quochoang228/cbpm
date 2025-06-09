@@ -66,7 +66,7 @@ class _ContractListPageState extends ConsumerState<ContractListPage> {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Row(
                         children: [
-                          CDNAssets.icons.closeCircle.svg(),
+                          CDNAssets.icons.filter.svg(),
                           SizedBox(width: 3),
                           Text(
                             'Lọc',
@@ -84,9 +84,11 @@ class _ContractListPageState extends ConsumerState<ContractListPage> {
             child: ref.watch(contractElectronicProvider).match(
                   notLoaded: (_) => const SizedBox(),
                   loading: (_) => const ListLoading(),
-                  noData: (_) => const BaseEmptyState(),
-                  failed: (error) => BaseEmptyState(
-                    title: error.error.message ?? '',
+                  noData: (_) => Center(child: const BaseEmptyState()),
+                  failed: (error) => Center(
+                    child: BaseEmptyState(
+                      title: error.error.message ?? '',
+                    ),
                   ),
                   fetched: (data) {
                     return ListView.separated(
@@ -94,11 +96,18 @@ class _ContractListPageState extends ConsumerState<ContractListPage> {
                           const SizedBox(height: 10),
                       itemBuilder: (_, index) {
                         return InkWell(
-                          onTap: () {
-                            context.push(
+                          onTap: () async {
+                            bool? result = await context.push(
                               Paths.detailContract,
-                              extra: data.data[index].contractPmxlId,
+                              extra: ContractArgumentsDto(
+                                id: data.data[index].contractPmxlId,
+                                showButtonSign:
+                                    data.data[index].showButtonSign ?? false,
+                              ),
                             );
+                            if(result ?? false){
+                              loadData();
+                            }
                           },
                           child: Container(
                             color: Colors.white,
@@ -109,9 +118,11 @@ class _ContractListPageState extends ConsumerState<ContractListPage> {
                                 children: [
                                   Row(
                                     children: [
-                                      Text(
-                                        data.data[index].contractCode ?? '',
-                                        style: DSTextStyle.labelMediumPromient,
+                                      Expanded(
+                                        child: Text(
+                                          data.data[index].contractCode ?? '',
+                                          style: DSTextStyle.labelMediumPromient,
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 5,

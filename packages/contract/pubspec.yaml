@@ -23,6 +23,7 @@ dependencies:
   image_picker: ^1.1.2
   syncfusion_flutter_pdfviewer: ^27.2.4
   json_serializable:
+  syncfusion_flutter_signaturepad:
 
   logs:
     git:

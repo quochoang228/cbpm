@@ -19,6 +19,13 @@ void injectorRouterApp() {
       path: Paths.detailContract,
       protected: true,
       builder: (context, state) => ContractDetailPage(
+        contractArgumentsDto: state.extra as ContractArgumentsDto,
+      ),
+    ),
+    RouteEntry(
+      path: Paths.contactHistory,
+      protected: true,
+      builder: (context, state) => ContactHistoryPage(
         contractPmxlId: state.extra as int,
       ),
     ),

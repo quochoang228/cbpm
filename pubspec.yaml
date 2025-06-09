@@ -27,6 +27,9 @@ dependencies:
   contract:
     path: packages/contract
 
+  wo:
+    path: packages/wo
+
   logs:
      git:
        url: https://github.com/quochoang228/logs.git
@@ -81,11 +84,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  mockito: ^5.4.5
-  analyzer: ^5.13.0
 
 flutter:
   uses-material-design: true
-
-dependency_overrides:
-  analyzer: ^5.13.0
