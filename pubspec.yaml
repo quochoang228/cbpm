@@ -27,6 +27,9 @@ dependencies:
   contract:
     path: packages/contract
 
+  wo:
+    path: packages/wo
+
   logs:
      git:
        url: https://github.com/quochoang228/logs.git

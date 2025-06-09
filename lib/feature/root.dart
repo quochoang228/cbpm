@@ -1,4 +1,5 @@
-import 'package:contract/router/paths.dart';
+import 'package:contract/router/paths.dart' as contractPath;
+import 'package:wo/router/paths.dart' as woPath;
 import 'package:ds/ds.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +31,14 @@ class _RootState extends ConsumerState<Root> {
             DSButton(
               label: 'Hợp đồng điện tử ',
               onPressed: (){
-                context.push(Paths.listContract);
+                context.push(contractPath.Paths.listContract);
+              },
+            ),
+            SizedBox(height: 10),
+            DSButton(
+              label: 'Quản lý YCTX',
+              onPressed: (){
+                context.push(woPath.Paths.woListPage);
               },
             ),
           ],
