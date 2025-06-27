@@ -6,12 +6,10 @@ class CustomerFeedbackSurveyPage extends StatefulHookConsumerWidget {
   final WoDetail woDetail;
 
   @override
-  ConsumerState<CustomerFeedbackSurveyPage> createState() =>
-      _CustomerFeedbackSurveyPageState();
+  ConsumerState<CustomerFeedbackSurveyPage> createState() => _CustomerFeedbackSurveyPageState();
 }
 
-class _CustomerFeedbackSurveyPageState
-    extends ConsumerState<CustomerFeedbackSurveyPage> {
+class _CustomerFeedbackSurveyPageState extends ConsumerState<CustomerFeedbackSurveyPage> {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController positionController = TextEditingController();
@@ -48,9 +46,9 @@ class _CustomerFeedbackSurveyPageState
                   ),
                   textAlign: TextAlign.left,
                 ),
-                16.height,
+                const Gap(DSSpacing.spacing4),
                 Divider(),
-                16.height,
+                const Gap(DSSpacing.spacing4),
                 FormBuilderTextField(
                   title: 'Họ và tên',
                   controller: fullNameController,
@@ -62,7 +60,7 @@ class _CustomerFeedbackSurveyPageState
                     return null;
                   },
                 ),
-                16.height,
+                const Gap(DSSpacing.spacing4),
                 FormBuilderTextField(
                   title: 'Số điện thoại',
                   controller: phoneNumberController,
@@ -75,7 +73,7 @@ class _CustomerFeedbackSurveyPageState
                     return null;
                   },
                 ),
-                16.height,
+                const Gap(DSSpacing.spacing4),
                 FormBuilderTextField(
                   title: 'Chức danh người khảo sát',
                   controller: positionController,
@@ -87,7 +85,7 @@ class _CustomerFeedbackSurveyPageState
                     return null;
                   },
                 ),
-                16.height,
+                const Gap(DSSpacing.spacing4),
                 FormBuilderTextField(
                   title: 'Thông tin đơn vị khảo sát',
                   controller: departmentController,
@@ -98,7 +96,7 @@ class _CustomerFeedbackSurveyPageState
                     return null;
                   },
                 ),
-                16.height,
+                const Gap(DSSpacing.spacing4),
                 Text(
                   'II. Nội dung khảo sát',
                   style: DSTextStyle.headlineMedium.copyWith(
@@ -106,9 +104,9 @@ class _CustomerFeedbackSurveyPageState
                   ),
                   textAlign: TextAlign.left,
                 ),
-                16.height,
+                const Gap(DSSpacing.spacing4),
                 Divider(),
-                16.height,
+                const Gap(DSSpacing.spacing4),
                 ListView.separated(
                   itemCount: widget.woDetail.listQuestion?.length ?? 0,
                   shrinkWrap: true,
@@ -161,7 +159,7 @@ class _CustomerFeedbackSurveyPageState
           item.question ?? '',
           style: DSTextStyle.headlineSmall,
         ),
-        8.height,
+        const Gap(DSSpacing.spacing2),
         FormBuilderTextField(
           title: 'Nhập câu trả lời',
           keyboardType: TextInputType.text,
@@ -187,7 +185,8 @@ class _CustomerFeedbackSurveyPageState
           item.question ?? '',
           style: DSTextStyle.headlineSmall,
         ),
-        8.height,
+        const Gap(DSSpacing.spacing2),
+
         FormBuilderTextField(
           title: 'Nhập số',
           keyboardType: TextInputType.number,
@@ -223,9 +222,9 @@ class _CustomerFeedbackSurveyPageState
       listQuestion: widget.woDetail.listQuestion,
     );
     var result = await ref.read(updateWoProvider.notifier).saveSurveyCLDV(
-      request: body,
-    );
-    if( result) {
+          request: body,
+        );
+    if (result) {
       showToast('Lưu khảo sát thành công');
       Navigator.pop(context, true);
     } else {

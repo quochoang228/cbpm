@@ -345,10 +345,10 @@ class _WoListPageState extends ConsumerState<WoListPage> {
             ],
           );
         }
-        return 0.height;
+        return SizedBox();
       case 'FT đã tiếp nhận':
         if (wo.hideExtendButton) {
-          return 0.height;
+          return SizedBox();
         }
         return Row(
           children: [
@@ -385,7 +385,7 @@ class _WoListPageState extends ConsumerState<WoListPage> {
         );
       case 'Đang thực hiện':
         if (wo.hideExtendButton) {
-          return 0.height;
+          return SizedBox();
         }
         return Row(
           children: [
@@ -403,9 +403,9 @@ class _WoListPageState extends ConsumerState<WoListPage> {
           ],
         );
       case 'Hoàn thành':
-        return 0.height;
+        return SizedBox();
       default:
-        return 0.height;
+        return SizedBox();
     }
   }
 

@@ -6,6 +6,9 @@ import '../feature/splash.dart';
 import 'paths.dart';
 
 void injectorRouterApp() {
+
+  AppRouterGuard.initializeAutoRestore();
+  // Initialize the router service
   Dependencies().registerSingleton<RouterService>(
     RouterService(),
   );
